@@ -1,0 +1,18 @@
+apiVersion: skaffold/v2beta26
+kind: Config
+metadata:
+  name: nodejs-express-test
+build:
+  artifacts:
+  - image: lukondefmwila/express-test
+    docker:
+      dockerfile: Dockerfile
+test:
+  - context: .
+    image: lukondefmwila/express-test
+    custom:
+      - command: npm run test
+deploy:
+  kubectl:
+    manifests:
+    - manifests.yaml
